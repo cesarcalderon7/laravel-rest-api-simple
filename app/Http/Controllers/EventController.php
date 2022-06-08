@@ -42,6 +42,14 @@ class EventController extends Controller
     {
         $account = Account::findOrFail($origin);
 
-  
+        $account->balance -= $amount;
+        $account->save();
+
+        return response()->json([
+            'origin' => [
+                'id' => $account->id,
+                'balance' => $account->balance
+          ]
+        ], 201);
     }
 }
