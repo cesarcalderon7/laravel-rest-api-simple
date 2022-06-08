@@ -14,6 +14,11 @@ class EventController extends Controller
                 $request->input('destination'),
                 $request->input('amount')
             );
+        }elseif($request->input('type') === 'withdraw'){
+            return $this -> withdraw(
+                $request->input('origin'),
+                $request->input('amount')
+            );
         }
     }
     
@@ -31,5 +36,12 @@ class EventController extends Controller
                 'balance' => $account->balance
           ]
         ], 201);
+    }
+
+    private function withdraw($origin, $amount )
+    {
+        $account = Account::findOrFail($origin);
+
+  
     }
 }
